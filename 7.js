@@ -1,11 +1,14 @@
-var mod = require('./7module.js');
-var path = require('path');
+var http = require('http');
 
-mod(process.argv[2], process.argv[3], function (err, list) {
-  	if (err)
-	    return console.error('There was an error:', err)
+http.get(process.argv[2], function (response) {
+	response.setEncoding('utf8');
 
-	list.forEach(function (filename) {
-		console.log(filename);
-	})
-})
+	response.on('error', function (e) {
+		console.error(e);
+	});
+	response.on('data', function (d) {
+		console.log(d);
+	});
+	response.on('end', function (e) {
+	});
+});

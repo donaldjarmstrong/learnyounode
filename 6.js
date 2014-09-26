@@ -1,13 +1,11 @@
-var fs = require('fs');
+var mod = require('./6module.js');
 var path = require('path');
 
-var dirName = process.argv[2]
-var filter = process.argv[3]
+mod(process.argv[2], process.argv[3], function (err, list) {
+  	if (err)
+	    return console.error('There was an error:', err)
 
-fs.readdir(dirName, function (err, list) {
 	list.forEach(function (filename) {
-		if (path.extname(filename) == '.' + filter) {
-			console.log(filename);
-		}
+		console.log(filename);
 	})
 })
